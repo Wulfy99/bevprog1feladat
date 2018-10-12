@@ -1,53 +1,31 @@
-#include <iostream>
-#include <cmath>
-#include <conio.h>
+#include <unistd.h>
+#include "std_lib_facilities.h"
 
-using namespace std;
-
-int write_x(int x,int y, string ball)
-    {
-    int xi,yi;
-
-    for(xi=0; xi<x; xi++)
-    {
-     cout << "\n";
-    }
-
-    for(yi=0; yi<y; yi++)
-    {
-     cout << " ";
-    }
-
-     cout << ball;
-
-return 0;
+void screen(int x, int y, int w, int h, string str){
+    int i;
+    system("clear");
+    for(i = 0; i < y; i++) cout << endl;
+    for(i = 0; i < x; i++) cout << " ";
+    cout << str << endl;
+    for(i = y + 1; i < h; i++) cout << endl;
 }
 
 int main()
 {
-
-    int width = 90;
-    int height = 25;
-    int x=0,y=0;
-
-    while(1)
-    {
-        system("cls");  // Windows
-        write_x(abs(height - (x++ % (height * 2 ))), abs(width - (y++ % (width*2))), "X");
+    int maxX = 80;
+    int maxY = 23;
+    int egyx = 1, egyy = -1, x = 1, y = 10;
+    int ty[maxY], tx[maxX];
+    int i;
+    for(i=1; i < maxY; i++) ty[i]=1; ty[1]=-1; ty[maxY - 1]=-1;
+    for(i=1; i < maxX; i++) tx[i]=1; tx[1]=-1; tx[maxX - 1]=-1;
+    while(1){
+        screen(x, y, maxX, maxY, "o");
+        x += egyx;
+        y += egyy;
+        egyx *= tx[x];
+        egyy *= ty[y];
+        usleep(100000);
     }
-
     return 0;
 }
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Press h to open a hovercard with more details.
